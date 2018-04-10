@@ -27,7 +27,7 @@
             <!-- Profile Image -->
             <div class="box box-primary">
                 <div class="box-body box-profile">
-                    <img class="profile-user-img img-responsive img-circle" src="../../dist/img/user4-128x128.jpg" alt="User profile picture">
+                    <img class="profile-user-img img-responsive img-circle" src="<?=$this->context->baseAssetUrl?>/img/user4-128x128.jpg" alt="User profile picture">
 
                     <h3 class="profile-username text-center">Nina Mcintire</h3>
 
@@ -105,7 +105,7 @@
                         <!-- Post -->
                         <div class="post">
                             <div class="user-block">
-                                <img class="img-circle img-bordered-sm" src="../../dist/img/user1-128x128.jpg" alt="user image">
+                                <img class="img-circle img-bordered-sm" src="<?=$this->context->baseAssetUrl?>/img/user1-128x128.jpg" alt="user image">
                                 <span class="username">
                           <a href="#">Jonathan Burke Jr.</a>
                           <a href="#" class="pull-right btn-box-tool"><i class="fa fa-times"></i></a>
@@ -136,7 +136,7 @@
                         <!-- Post -->
                         <div class="post clearfix">
                             <div class="user-block">
-                                <img class="img-circle img-bordered-sm" src="../../dist/img/user7-128x128.jpg" alt="User Image">
+                                <img class="img-circle img-bordered-sm" src="<?=$this->context->baseAssetUrl?>/img/user7-128x128.jpg" alt="User Image">
                                 <span class="username">
                           <a href="#">Sarah Ross</a>
                           <a href="#" class="pull-right btn-box-tool"><i class="fa fa-times"></i></a>
@@ -168,7 +168,7 @@
                         <!-- Post -->
                         <div class="post">
                             <div class="user-block">
-                                <img class="img-circle img-bordered-sm" src="../../dist/img/user6-128x128.jpg" alt="User Image">
+                                <img class="img-circle img-bordered-sm" src="<?=$this->context->baseAssetUrl?>/img/user6-128x128.jpg" alt="User Image">
                                 <span class="username">
                           <a href="#">Adam Jones</a>
                           <a href="#" class="pull-right btn-box-tool"><i class="fa fa-times"></i></a>
@@ -178,21 +178,21 @@
                             <!-- /.user-block -->
                             <div class="row margin-bottom">
                                 <div class="col-sm-6">
-                                    <img class="img-responsive" src="../../dist/img/photo1.png" alt="Photo">
+                                    <img class="img-responsive" src="<?=$this->context->baseAssetUrl?>/img/photo1.png" alt="Photo">
                                 </div>
                                 <!-- /.col -->
                                 <div class="col-sm-6">
                                     <div class="row">
                                         <div class="col-sm-6">
-                                            <img class="img-responsive" src="../../dist/img/photo2.png" alt="Photo">
+                                            <img class="img-responsive" src="<?=$this->context->baseAssetUrl?>/img/photo2.png" alt="Photo">
                                             <br>
-                                            <img class="img-responsive" src="../../dist/img/photo3.jpg" alt="Photo">
+                                            <img class="img-responsive" src="<?=$this->context->baseAssetUrl?>/img/photo3.jpg" alt="Photo">
                                         </div>
                                         <!-- /.col -->
                                         <div class="col-sm-6">
-                                            <img class="img-responsive" src="../../dist/img/photo4.jpg" alt="Photo">
+                                            <img class="img-responsive" src="<?=$this->context->baseAssetUrl?>/img/photo4.jpg" alt="Photo">
                                             <br>
-                                            <img class="img-responsive" src="../../dist/img/photo1.png" alt="Photo">
+                                            <img class="img-responsive" src="<?=$this->context->baseAssetUrl?>/img/photo1.png" alt="Photo">
                                         </div>
                                         <!-- /.col -->
                                     </div>

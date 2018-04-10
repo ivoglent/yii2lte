@@ -7,12 +7,13 @@ use yii\web\AssetBundle;
 /**
  * Main backend application asset bundle.
  */
-class AppAsset extends AssetBundle
+class AppAsset2 extends AssetBundle
 {
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
-        'libs/fontawesome/css/fontawesome-all.css',
+        'libs/font-awesome/css/font-awesome.css',
+        'libs/Ionicons/css/ionicons.css',
         'css/AdminLTE.min.css',
         'css/skins/_all-skins.min.css',
         'libs/morris.js/morris.css',

@@ -4,9 +4,15 @@
  * User: ivoglent
  * Date: 4/10/18
  * Time: 12:56 PM
+ * @var $this \yii\web\View
  */
 $baseAssetUrl = $this->assetManager->getBundle(\ivoglent\yii2lte\assets\AppAsset::className())->baseUrl;
-$this->registerJsFile($baseAssetUrl . '/js/pages/dashboard.js');
+
+$this->registerJsFile($baseAssetUrl . '/js/pages/dashboard2.js', [
+    'position' => \yii\web\View::POS_END,
+    'depends' => ['\yii\web\JqueryAsset']
+]);
+
 ?>
 <!-- Content Header (Page header) -->
 <section class="content-header">
