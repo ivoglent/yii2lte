@@ -28,6 +28,17 @@ class AdminLTEModule extends Module implements BootstrapInterface
     public $skinType = 'all';
 
     public $controllerNamespace = 'ivoglent\yii2lte\controllers';
+
+    /**
+     * Alias path to menu file
+     * @var string
+     */
+    public $menuFile = '@vendor/ivoglent/yii2lte/src/views/layouts/menu.php';
+
+    public $configs = [
+        'logo' => 'Admint LTE',
+        'footer' => '&copy; 2018 AdminLTE'
+    ];
     /**
      * Bootstrap method to be called during application bootstrap stage.
      * @param Application $app the application currently running
@@ -40,6 +51,18 @@ class AdminLTEModule extends Module implements BootstrapInterface
         }
         // TODO: Implement bootstrap() method.
         $this->publishAsset($app);
+    }
+
+    /**
+     * @return array|mixed
+     */
+    public function getMenu() {
+        $menu = [];
+        $menuFile = \Yii::getAlias($this->menuFile);
+        if (file_exists($menuFile)) {
+            $menu = require $menuFile;
+        }
+        return $menu;
     }
 
     /**
