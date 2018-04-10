@@ -1,0 +1,24 @@
+{
+    "name": "ivoglent/yii2lte",
+    "description": "AdminLTE template for Yii2 framework",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Long Nguyen",
+            "email": "hi@longnv.info"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.4.0",
+        "yiisoft/yii2-jui" : "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "4.1.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "ivoglent\\yii2lte\\": "./src"
+        }
+    }
+}
