@@ -7,7 +7,10 @@
  * @var $this \yii\web\View
  */
 $baseAssetUrl = $this->assetManager->getBundle(\ivoglent\yii2lte\assets\AppAsset::className())->baseUrl;
-$this->registerJsFile($baseAssetUrl . '/js/pages/dashboard2.js');
+$this->registerJsFile($baseAssetUrl . '/js/pages/dashboard1.js', [
+    'position' => \yii\web\View::POS_END,
+    'depends' => ['\yii\web\JqueryAsset']
+]);
 ?>
 <!-- Content Header (Page header) -->
 <section class="content-header">
