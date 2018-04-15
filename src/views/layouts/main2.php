@@ -15,6 +15,11 @@ $this->beginPage();
 $lte =  \Yii::$app->getModule('adminlte');
 $baseAssetUrl = $this->assetManager->getBundle(\ivoglent\yii2lte\assets\AppAsset2::className())->baseUrl;
 $menu = $lte->getMenu();
+$configs = $lte->configs;
+$assets = $lte->appAssets;
+if ($assets) {
+    $assets::register($this);
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -47,10 +52,7 @@ $menu = $lte->getMenu();
     <header class="main-header">
         <!-- Logo -->
         <a href="<?=\yii\helpers\BaseUrl::base(true)?>" class="logo">
-            <!-- mini logo for sidebar mini 50x50 pixels -->
-            <span class="logo-mini"><b>A</b>LT</span>
-            <!-- logo for regular state and mobile devices -->
-            <span class="logo-lg"><b>Admin</b>LTE</span>
+            <?=$configs['logo']?>
         </a>
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top">
@@ -359,11 +361,7 @@ $menu = $lte->getMenu();
     </div>
     <!-- /.content-wrapper -->
     <footer class="main-footer">
-        <div class="pull-right hidden-xs">
-            <b>Version</b> 2.4.0
-        </div>
-        <strong>Copyright &copy; 2014-2016 <a href="https://adminlte.io">Almsaeed Studio</a>.</strong> All rights
-        reserved.
+        <?=$configs['footer']?>
     </footer>
 
     <!-- Control Sidebar -->
