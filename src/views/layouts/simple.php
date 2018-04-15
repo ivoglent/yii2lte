@@ -9,6 +9,13 @@
  */
 \ivoglent\yii2lte\assets\SimpleAsset::register($this);
 $this->beginPage();
+/** @var \ivoglent\yii2lte\AdminLTEModule $lte */
+$lte =  \Yii::$app->getModule('adminlte');
+$configs = $lte->configs;
+$assets = $lte->appAssets;
+if ($assets) {
+    $assets::register($this);
+}
 ?>
 
 <!DOCTYPE html>

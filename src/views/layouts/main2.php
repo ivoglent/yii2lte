@@ -9,12 +9,19 @@
  * @var $content string
  */
 
+use yii\helpers\Html;
+
 \ivoglent\yii2lte\assets\AppAsset2::register($this);
 $this->beginPage();
 /** @var \ivoglent\yii2lte\AdminLTEModule $lte */
 $lte =  \Yii::$app->getModule('adminlte');
 $baseAssetUrl = $this->assetManager->getBundle(\ivoglent\yii2lte\assets\AppAsset2::className())->baseUrl;
 $menu = $lte->getMenu();
+$configs = $lte->configs;
+$assets = $lte->appAssets;
+if ($assets) {
+    $assets::register($this);
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -28,6 +35,7 @@ $menu = $lte->getMenu();
     <?php
     $this->head();
     ?>
+    <?= Html::csrfMetaTags() ?>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -47,10 +55,7 @@ $menu = $lte->getMenu();
     <header class="main-header">
         <!-- Logo -->
         <a href="<?=\yii\helpers\BaseUrl::base(true)?>" class="logo">
-            <!-- mini logo for sidebar mini 50x50 pixels -->
-            <span class="logo-mini"><b>A</b>LT</span>
-            <!-- logo for regular state and mobile devices -->
-            <span class="logo-lg"><b>Admin</b>LTE</span>
+            <?=$configs['logo']?>
         </a>
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top">
@@ -354,16 +359,23 @@ $menu = $lte->getMenu();
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
-        <?=$content?>
+        <div class="content-container">
+            <?php
+            if (Yii::$app->session->hasSessionId) {
+                foreach (Yii::$app->session->getAllFlashes() as $name => $message) {
+                    echo '<div class="alert alert-' . $name . '">' . $message . '</div>';
+                }
+                Yii::$app->session->removeAllFlashes();
+            }
+            ?>
+            <?=$content?>
+
+        </div>
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
     <footer class="main-footer">
-        <div class="pull-right hidden-xs">
-            <b>Version</b> 2.4.0
-        </div>
-        <strong>Copyright &copy; 2014-2016 <a href="https://adminlte.io">Almsaeed Studio</a>.</strong> All rights
-        reserved.
+        <?=$configs['footer']?>
     </footer>
 
     <!-- Control Sidebar -->

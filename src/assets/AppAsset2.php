@@ -2,6 +2,7 @@
 
 namespace ivoglent\yii2lte\assets;
 
+use yii\helpers\ArrayHelper;
 use yii\web\AssetBundle;
 
 /**
@@ -9,6 +10,7 @@ use yii\web\AssetBundle;
  */
 class AppAsset2 extends AssetBundle
 {
+    public $distUrl;
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
@@ -52,9 +54,14 @@ class AppAsset2 extends AssetBundle
         parent::__construct($config);
         $paths = \Yii::$app->getModule('adminlte')->assetPath;
         if (!empty($paths)) {
-            $this->sourcePath = dirname(__FILE__) . '/statics';
-            $this->basePath = $paths[0];
-            $this->baseUrl = $paths[1];
+            $baseUrl = $paths[1];
+            $this->distUrl = $baseUrl;
+            foreach ($this->css as &$css) {
+                $css = $baseUrl  . '/' . $css;
+            }
+            foreach ($this->js as &$js) {
+                $js = $baseUrl  . '/' . $js;
+            }
         }
     }
 }

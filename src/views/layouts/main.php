@@ -9,13 +9,19 @@
  */
 
 
+use yii\helpers\Html;
+
 \ivoglent\yii2lte\assets\AppAsset::register($this);
 $this->beginPage();
 /** @var \ivoglent\yii2lte\AdminLTEModule $lte */
 $lte =  \Yii::$app->getModule('adminlte');
-$baseAssetUrl = $this->assetManager->getBundle(\ivoglent\yii2lte\assets\AppAsset::className())->baseUrl;
+$baseAssetUrl = $this->assetManager->getBundle(\ivoglent\yii2lte\assets\AppAsset::className())->distUrl;
 $menu = $lte->getMenu();
 $configs = $lte->configs;
+$assets = $lte->appAssets;
+if ($assets) {
+    $assets::register($this);
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -26,7 +32,7 @@ $configs = $lte->configs;
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <?php $this->head()?>
-
+    <?= Html::csrfMetaTags() ?>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -72,7 +78,7 @@ $configs = $lte->configs;
                                     <li><!-- start message -->
                                         <a href="#">
                                             <div class="pull-left">
-                                                <img src="<?=$baseAssetUrl?>/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                                                <img src="<?=(\Yii::$app->user->identity && isset(\Yii::$app->user->identity->avatar)) ?  \Yii::$app->user->identity->avatar : $baseAssetUrl . '/img/user2-160x160.jpg'?>" class="img-circle" alt="User Image">
                                             </div>
                                             <h4>
                                                 Support Team
@@ -267,12 +273,23 @@ $configs = $lte->configs;
                                 <img src="<?=$baseAssetUrl?>/img/user2-160x160.jpg" class="img-circle" alt="User Image">
 
                                 <p>
-                                    Alexander Pierce - Web Developer
-                                    <small>Member since Nov. 2012</small>
+                                    <?php
+                                    $roles = \Yii::$app->authManager->getRolesByUser(\Yii::$app->user->getId());
+                                    $roleName = [];
+                                    foreach ($roles as $role) {
+                                        $roleName[] = $role->name;
+                                    }
+                                    echo implode($roleName, '-');
+                                    ?>
+                                    <small>
+                                        <?php if (isset(\Yii::$app->user->identity->created_at)):?>
+                                            <?=\Yii::$app->user->identity->created_at?>
+                                        <?php endif;?>
+                                    </small>
                                 </p>
                             </li>
                             <!-- Menu Body -->
-                            <li class="user-body">
+                            <!--<li class="user-body">
                                 <div class="row">
                                     <div class="col-xs-4 text-center">
                                         <a href="#">Followers</a>
@@ -284,23 +301,19 @@ $configs = $lte->configs;
                                         <a href="#">Friends</a>
                                     </div>
                                 </div>
-                                <!-- /.row -->
-                            </li>
+                            </li>-->
                             <!-- Menu Footer-->
                             <li class="user-footer">
                                 <div class="pull-left">
-                                    <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                    <a href="<?=\yii\helpers\Url::to($configs['userProfileUrl'])?>" class="btn btn-default btn-flat"><?=\Yii::t('app', 'Profile')?></a>
                                 </div>
                                 <div class="pull-right">
-                                    <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                                    <?=\yii\helpers\Html::a(\Yii::t('app', 'Sign Out'), $configs['logoutUrl'], ['data-method' => 'POST', 'class' => 'btn btn-default btn-flat', 'data-params' => [\Yii::$app->request->csrfParam => \Yii::$app->request->csrfToken]])?>
                                 </div>
                             </li>
                         </ul>
                     </li>
                     <!-- Control Sidebar Toggle Button -->
-                    <li>
-                        <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
-                    </li>
                 </ul>
             </div>
 
@@ -350,7 +363,17 @@ $configs = $lte->configs;
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
-        <?=$content?>
+        <div class="content-container">
+            <?php
+            if (Yii::$app->session->hasSessionId) {
+                foreach (Yii::$app->session->getAllFlashes() as $name => $message) {
+                    echo '<div class="alert alert-' . $name . '">' . $message . '</div>';
+                }
+                Yii::$app->session->removeAllFlashes();
+            }
+            ?>
+            <?=$content?>
+        </div>
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
