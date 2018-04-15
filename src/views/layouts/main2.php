@@ -9,6 +9,8 @@
  * @var $content string
  */
 
+use yii\helpers\Html;
+
 \ivoglent\yii2lte\assets\AppAsset2::register($this);
 $this->beginPage();
 /** @var \ivoglent\yii2lte\AdminLTEModule $lte */
@@ -33,6 +35,7 @@ if ($assets) {
     <?php
     $this->head();
     ?>
+    <?= Html::csrfMetaTags() ?>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -356,7 +359,18 @@ if ($assets) {
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
-        <?=$content?>
+        <div class="content-container">
+            <?php
+            if (Yii::$app->session->hasSessionId) {
+                foreach (Yii::$app->session->getAllFlashes() as $name => $message) {
+                    echo '<div class="alert alert-' . $name . '">' . $message . '</div>';
+                }
+                Yii::$app->session->removeAllFlashes();
+            }
+            ?>
+            <?=$content?>
+
+        </div>
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
