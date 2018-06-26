@@ -46,7 +46,8 @@ class AppAsset2 extends AssetBundle
     public $depends = [
         'yii\web\YiiAsset',
         'yii\bootstrap\BootstrapAsset',
-        'yii\jui\JuiAsset',
+        //'yii\jui\JuiAsset',
+        'yii\web\JqueryAsset'
     ];
 
     public function __construct(array $config = [])
