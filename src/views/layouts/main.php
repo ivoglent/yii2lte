@@ -17,7 +17,6 @@ $this->beginPage();
 $lte =  \Yii::$app->getModule('adminlte');
 $baseAssetUrl = $this->assetManager->getBundle(\ivoglent\yii2lte\assets\AppAsset::className())->distUrl;
 $menu = $lte->getMenu();
-$assets = $lte->appAssets;
 if ($assets) {
     $assets::register($this);
 }
@@ -104,6 +103,7 @@ if (\Yii::$app->user->isGuest === false) {
                                             </a>
                                         </li>
                                     <?php endforeach;?>
+
                                 </ul>
                             </li>
                             <li class="footer"><a href="<?=$messages['url']?>"><?=\Yii::t('app', 'See All Messages')?></a></li>
