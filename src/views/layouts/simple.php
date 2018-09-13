@@ -11,7 +11,7 @@
 $this->beginPage();
 /** @var \ivoglent\yii2lte\AdminLTEModule $lte */
 $lte =  \Yii::$app->getModule('adminlte');
-$configs = $lte->configs;
+//$configs = $lte->configs;
 $assets = $lte->appAssets;
 if ($assets) {
     $assets::register($this);

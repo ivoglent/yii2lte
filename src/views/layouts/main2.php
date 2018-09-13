@@ -17,7 +17,7 @@ $this->beginPage();
 $lte =  \Yii::$app->getModule('adminlte');
 $baseAssetUrl = $this->assetManager->getBundle(\ivoglent\yii2lte\assets\AppAsset2::className())->baseUrl;
 $menu = $lte->getMenu();
-$configs = $lte->configs;
+//$configs = $lte->configs;
 $assets = $lte->appAssets;
 if ($assets) {
     $assets::register($this);
