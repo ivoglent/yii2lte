@@ -70,6 +70,12 @@ if (\Yii::$app->user->isGuest === false) {
             <!-- Navbar Right Menu -->
             <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
+                    <?php
+                    $languages = $this->getComponent('languages');
+                    if($languages):
+                    ?>
+                        <?=$languages?>
+                    <?php endif;?>
                     <!-- Messages: style can be found in dropdown.less-->
                     <?php
                     $messages = $this->getComponent('messages');
